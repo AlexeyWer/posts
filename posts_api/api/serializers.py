@@ -12,17 +12,12 @@ class PostSerializers(serializers.ModelSerializer):
         read_only=True,
         slug_field='username'
     )
-    read_status = serializers.BooleanField(read_only=True)
+    read_status = serializers.BooleanField(read_only=True, default=True)
 
     class Meta:
         model = Post
         fields = '__all__'
-    
-    def create(self, validated_data):
-        post = super().create(validated_data)
-        user = self.context['request'].user
-        ReadStatus.objects.create(post=post, user=user)
-        return post
+
 
 class FollowSerializers(serializers.ModelSerializer):
     user = SlugRelatedField(
@@ -57,3 +52,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'posts_count')
+        ref_name = 'username'
