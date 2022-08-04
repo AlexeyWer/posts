@@ -21,8 +21,8 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text
-    
-   
+
+
 class Follow(models.Model):
     user = models.ForeignKey(
         User,
@@ -40,7 +40,7 @@ class Follow(models.Model):
     class Meta:
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
-    
+
     def __str__(self):
         return f'Пользователь {self.user} подписан на {self.following}'
 
@@ -62,7 +62,7 @@ class ReadStatus(models.Model):
     class Meta:
         verbose_name = 'Прочитанная публикация'
         verbose_name_plural = 'Прочитанные публикации'
-    
+
     def __str__(self):
         return f'Пользователь {self.user} прочитал публикацию №{self.post}'
 

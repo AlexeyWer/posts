@@ -14,6 +14,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('pub_date',)
     empty_value_display = '-пусто-'
 
+
 class FollowAdmin(admin.ModelAdmin):
     list_display = ('user', 'following')
     search_fields = ('user', 'following')

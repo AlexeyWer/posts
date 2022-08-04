@@ -3,15 +3,11 @@ from rest_framework import filters, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.pagination import LimitOffsetPagination
 
-from posts.models import Post, User, ReadStatus
+from posts.models import Post, ReadStatus, User
 
 from .mixins import ListCreateViewSet, ListViewSet
 from .permissions import IsOwnerOrReadOnly
-from .serializers import (
-    FollowSerializers,
-    PostSerializers,
-    UserSerializer
-)
+from .serializers import FollowSerializers, PostSerializers, UserSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -30,7 +26,7 @@ class PostViewSet(viewsets.ModelViewSet):
             read_status=Exists(post_read_status)
         )
         return queryset
-    
+
     def retrieve(self, request, *args, **kwargs):
         post = Post.objects.filter(pk=self.kwargs.get('pk'))
         if not post.exists():

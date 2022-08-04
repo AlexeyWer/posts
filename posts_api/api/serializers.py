@@ -3,8 +3,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.relations import SlugRelatedField
 from rest_framework.validators import UniqueTogetherValidator
 
-
-from posts.models import Follow, Post, User, ReadStatus
+from posts.models import Follow, Post, User
 
 
 class PostSerializers(serializers.ModelSerializer):
@@ -51,5 +50,5 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'posts_count')
+        fields = ('id', 'username', 'posts_count')
         ref_name = 'username'

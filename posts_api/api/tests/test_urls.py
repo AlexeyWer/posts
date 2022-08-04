@@ -1,16 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from rest_framework.authtoken.models import Token
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from posts.models import Post, Follow
+from posts.models import Post
 
 User = get_user_model()
 
 
 class StaticURLTests(APITestCase):
-    
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -30,7 +28,7 @@ class StaticURLTests(APITestCase):
             reverse('posts-detail', kwargs={'pk': cls.post.pk}),
             reverse('users-detail', kwargs={'pk': cls.user.pk}),
         ]
-    
+
     def setUp(self):
         self.auth_client = APIClient()
         self.auth_client.force_authenticate(user=StaticURLTests.user)
@@ -44,4 +42,4 @@ class StaticURLTests(APITestCase):
         for url in urls:
             with self.subTest(url=url):
                 response = self.auth_client.get(url)
-                self.assertEqual(response.status_code, status.HTTP_200_OK)       
+                self.assertEqual(response.status_code, status.HTTP_200_OK)
