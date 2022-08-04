@@ -35,6 +35,9 @@ pip install -r requirements.txt
 ```
 
 Выполнить миграции:
+``` bash
+cd posts_api/
+```
 
 ``` bash
 python3 manage.py migrate
